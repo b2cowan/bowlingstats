@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const BowlerStats = () => {
@@ -22,16 +25,28 @@ const BowlerStats = () => {
 
     return (
         <React.Fragment>
-            <h1>Bowler Stats</h1>
-            <ul>
-                {!isLoading && loadedBowlers && loadedBowlers.map(bowler => {
-                return (
-                <li key={bowler.id}>
-                    {bowler.firstName} {bowler.lastName}
-                    </li>
-                )
-                })}
-            </ul>
+            <ErrorModal error={error} onClear={clearError} />
+            {isLoading && (
+                <div className="center">
+                    <LoadingSpinner />
+                </div>
+            )}
+            {!isLoading && loadedBowlers &&
+                <div>
+                    <h1>Bowlers</h1>
+                    <ul>
+                        {loadedBowlers.map(bowler => {
+                            return (
+                                <Link to={`/${bowler.id}`} key={bowler.id}>
+                                    <div>
+                                        {bowler.firstName} {bowler.lastName}
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </ul>
+                </div>
+            }
         </React.Fragment>
     )
 };
