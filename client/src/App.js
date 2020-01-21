@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
-import Home from './home/pages/Home';
 import BowlerStats from './bowler/pages/BowlerStats';
 import TeamStats from './team/pages/TeamStats';
 import BeerFrames from './beerframes/pages/BeerFrames';
+import CreateGame from './game/pages/CreateGame';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
+import CreatePlayerGame from './game/components/CreatePlayerGame';
 
 const App = () => {
     return (
@@ -14,7 +15,7 @@ const App = () => {
             <main>
                 <Switch>
                     <Route exact path="/">
-                        <Home />
+                        <h1>hi Pat</h1>
                     </Route>
                     <Route exact path="/teams">
                         <TeamStats />
@@ -24,6 +25,12 @@ const App = () => {
                     </Route>
                     <Route exact path="/beerframes">
                         <BeerFrames />
+                    </Route>
+                    <Route exact path="/games/new">
+                        <CreateGame />
+                    </Route>
+                    <Route exact path="/games/testgame">
+                        <CreatePlayerGame />
                     </Route>
                     <Redirect to="/" />
                 </Switch>
