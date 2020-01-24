@@ -1,0 +1,14 @@
+.player-game {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0;
+}
+
+.player-name {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 100px;
+    padding: 0.5rem;
+    text-align: left;  
+}

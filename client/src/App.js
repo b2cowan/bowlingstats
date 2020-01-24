@@ -6,7 +6,6 @@ import TeamStats from './team/pages/TeamStats';
 import BeerFrames from './beerframes/pages/BeerFrames';
 import CreateGame from './game/pages/CreateGame';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
-import CreatePlayerGame from './game/components/CreatePlayerGame';
 
 const App = () => {
     return (
@@ -28,9 +27,6 @@ const App = () => {
                     </Route>
                     <Route exact path="/games/new">
                         <CreateGame />
-                    </Route>
-                    <Route exact path="/games/testgame">
-                        <CreatePlayerGame />
                     </Route>
                     <Redirect to="/" />
                 </Switch>

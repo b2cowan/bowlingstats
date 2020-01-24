@@ -1,13 +1,16 @@
 import React from 'react';
-import { useForm, ErrorMessage } from 'react-hook-form';
+// import { useForm, ErrorMessage } from 'react-hook-form';
 import Frame from './Frame';
 
-import './CreatePlayerGame.css';
+import './PlayerGameInput.css';
 
 const CreatePlayerGame = props => {
     return (
         <div className="player-game">
-            <Frame frameNum={1} frameScore={32}/>
+            <div className="player-name">
+                <h4>{props.firstName} {props.lastName}</h4>
+            </div>
+            <Frame frameNum={1} />
             <Frame frameNum={2} />
             <Frame frameNum={3} />
             <Frame frameNum={4} />

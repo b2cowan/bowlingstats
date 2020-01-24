@@ -1,37 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-import { useHttpClient } from '../../shared/hooks/http-hook';
+import axios from 'axios';
 
 const BowlerStats = () => {
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedBowlers, setLoadedBowlers] = useState();
 
     useEffect(() => {
-        const fetchBowlers = async () => {
-            try {
-                const responseData = await sendRequest(`/api/bowlers`);
-
-                setLoadedBowlers(responseData.bowlers);
-                console.log(responseData.bowlers);
-            } catch (err) {
-                console.log(err)
-            }
-        };
-        fetchBowlers();
-    }, [sendRequest]);
+        axios(`/api/bowlers`)
+        .then(res => {
+            setLoadedBowlers(res.data.bowlers);
+        })
+        .catch(err => 
+            console.log(err))
+    }, []);
 
     return (
         <React.Fragment>
-            <ErrorModal error={error} onClear={clearError} />
-            {isLoading && (
-                <div className="center">
-                    <LoadingSpinner />
-                </div>
-            )}
-            {!isLoading && loadedBowlers &&
+            {loadedBowlers &&
                 <div>
                     <h1>Bowlers</h1>
                     <ul>

@@ -1,13 +1,24 @@
-import React from 'react';
-import { useForm, ErrorMessage } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { useForm, FormContext } from 'react-hook-form';
 import axios from 'axios';
 // import { useHistory } from 'react-router-dom';
 
-import CreatePlayerGame from '../components/CreatePlayerGame';
+import GameDetailsInput from '../components/GameDetailsInput';
+import PlayerGameInput from '../components/PlayerGameInput';
+import './CreateGame.css';
 
 const CreateGame = () => {
-    const { register, handleSubmit, errors, reset } = useForm();
-    
+    const methods = useForm();
+    const [loadedBowlers, setLoadedBowlers] = useState();
+
+    useEffect(() => {
+        axios(`/api/bowlers`)
+        .then(res => {
+            setLoadedBowlers(res.data.bowlers);
+        })
+        .catch(err => 
+            console.log(err))
+    }, []);
 
     const onSubmit = (game, e) => {
         e.preventDefault();
@@ -18,43 +29,28 @@ const CreateGame = () => {
             .catch(err => {
                 console.log(err);
             })
-            .then(reset());
+            .then(methods.reset());
+        console.log(game);
     };
 
     return (
-        <form className='game-form' onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label>Date</label>
-                <input
-                    type="date"
-                    name="onDate"
-                    ref={register({
-                        required: 'A valid date is required'
+        <FormContext {...methods}>
+            {loadedBowlers &&
+                <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
+                    <GameDetailsInput />
+                    {loadedBowlers && loadedBowlers.map(bowler => {
+                        return (
+                            <PlayerGameInput
+                                key={bowler.id}
+                                firstName={bowler.firstName}
+                                lastName={bowler.lastName}
+                            />
+                        )
                     })}
-                />
-                <ErrorMessage errors={errors} name="onDate" as="p" />
-            </div>
-            <div>
-                <label>Game Number</label>
-                <input
-                    type="text"
-                    name="gameNum"
-                    ref={register({
-                        required: 'Game number is required'
-                    })}
-                />
-            </div>
-            <div>
-                <label>Starting Lane</label>
-                <input
-                    type="text"
-                    name="laneNum"
-                    ref={register}
-                />
-            </div>
-            <CreatePlayerGame />    
-            <input type="submit" />
-        </form>
+                    <input type="submit" value="Create Game" />
+                </form>
+            }
+        </FormContext>
     )
 };
 
