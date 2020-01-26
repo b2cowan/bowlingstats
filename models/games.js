@@ -18,18 +18,9 @@ var gameSchema = new Schema({
         position: Number,
         frames: [{
             frameNum: { type: Number, required: true },
-            shot1: {
-                result: { type: Number, required: true },
-                pinsLeft: [{ type: Number }]
-            },
-            shot2: {
-                result: { type: Number, required: true },
-                pinsLeft: [{ type: Number }]
-            },
-            shot3: {
-                result: { type: Number, required: true },
-                pinsLeft: [{ type: Number }]
-            },
+            shot1: String,
+            shot2: String,
+            shot3: String,
             frameScore: { type: Number, required: true }
         }]
     }]

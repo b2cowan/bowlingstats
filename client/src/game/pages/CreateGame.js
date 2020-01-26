@@ -13,38 +13,45 @@ const CreateGame = () => {
 
     useEffect(() => {
         axios(`/api/bowlers`)
-        .then(res => {
-            setLoadedBowlers(res.data.bowlers);
-        })
-        .catch(err => 
-            console.log(err))
+            .then(res => {
+                setLoadedBowlers(res.data.bowlers);
+            })
+            .catch(err =>
+                console.log(err))
     }, []);
 
     const onSubmit = (game, e) => {
         e.preventDefault();
-        axios.post(`/api/games`, game)
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            .then(methods.reset());
+        // axios.post(`/api/games`, game)
+        //     .then(res => {
+        //         console.log(res.data);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+        //     .then(methods.reset());
         console.log(game);
     };
 
+    
     return (
         <FormContext {...methods}>
             {loadedBowlers &&
                 <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
                     <GameDetailsInput />
-                    {loadedBowlers && loadedBowlers.map(bowler => {
+                    {loadedBowlers && loadedBowlers.map((bowler, idx) => {
+                        const fieldName = `bowlerStats[${idx}]`;
                         return (
-                            <PlayerGameInput
-                                key={bowler.id}
-                                firstName={bowler.firstName}
-                                lastName={bowler.lastName}
-                            />
+                            <fieldset name={fieldName} key={fieldName}>
+                                <PlayerGameInput
+                                    idx={idx}
+                                    fieldName={fieldName}
+                                    key={bowler.id}
+                                    bowlerId={bowler.id}
+                                    firstName={bowler.firstName}
+                                    lastName={bowler.lastName}
+                                />
+                            </fieldset>
                         )
                     })}
                     <input type="submit" value="Create Game" />
