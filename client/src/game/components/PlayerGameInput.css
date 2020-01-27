@@ -18,8 +18,9 @@
 
 .player-btns {
     display: flex;
-    justify-content: center;
-    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
     height: 20px;
     margin: 1rem 0;
 }
@@ -27,3 +28,7 @@
 .player-btns span{
     height: 10px;
 }
+
+/* .player-btns button{
+    height: 15px;
+} */
