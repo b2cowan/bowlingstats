@@ -57,14 +57,21 @@ const CreateGame = () => {
                             </fieldset>
                         )
                     })}
-                    <div className='create-game-submit-btn'>
+                    <div className="create-game-btns">
                         <Button
                             type="submit"
                             color="primary"
-                            variant="contained"
+                            variant="outlined"
                             startIcon={<SaveIcon />}
                         >
-                            Create Game
+                            Save Game
+                    </Button>
+                        <Button
+                            type="submit"
+                            color="secondary"
+                            variant="outlined"
+                        >
+                            Clear Form
                     </Button>
                     </div>
                 </form>

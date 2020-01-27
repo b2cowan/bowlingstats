@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import Button from '@material-ui/core/Button';
@@ -6,12 +6,20 @@ import Button from '@material-ui/core/Button';
 import './Frame.css';
 
 const Frame = props => {
-    const { register } = useFormContext();
+    const { register, setValue } = useFormContext();
     const [isSplit, setIsSplit] = useState(false);
 
     const handleSplit = () => {
         setIsSplit(!isSplit);
     };
+
+    useEffect (() => {
+        if (props.isAbsent) {
+            setValue(`${props.fieldName}.shot1`, '');
+            setValue(`${props.fieldName}.shot2`, '');
+            setValue(`${props.fieldName}.shot3`, '');
+        }
+    });
 
     return (
         <div className={`frame ${props.frameNum === 10 ? "frame-ten" : "frames-less-10"} `}>
