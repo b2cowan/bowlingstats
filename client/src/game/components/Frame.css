@@ -4,12 +4,14 @@
     border: 1px solid black;
     width: 100px;
     padding: 0;
-    text-align: center;    
+    text-align: center;
+    margin: 1rem 0;    
 }
 
 .frame-shots {
     display: flex;
     justify-content: flex-end;
+    height: 20px;
     margin: 0;
     padding: 0;
 }
@@ -19,6 +21,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 .frame-score {
@@ -26,7 +29,7 @@
     align-self: center;
     display: flex;
     width: 80%;
-    height: 80%;
+    height: 35px;
     padding-bottom: 5px;
     padding-top: 5px;
     margin: 0;
@@ -39,10 +42,27 @@
     padding: 0;
     background-color: white;
     border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 100%;
 }
 
 .frame-title {
     border-bottom: 1px solid black;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+
+.frame-split-btn{
+    height: 20px;
+    margin-bottom: 1rem;
+}
+
+.frame-split-btn span{
+    height: 10px;
+}
+
+.frame-ten {
+    border-radius: 0 8px 8px 0;
 }

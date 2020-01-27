@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import axios from 'axios';
+
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 // import { useHistory } from 'react-router-dom';
 
 import GameDetailsInput from '../components/GameDetailsInput';
@@ -33,7 +36,7 @@ const CreateGame = () => {
         console.log(game);
     };
 
-    
+
     return (
         <FormContext {...methods}>
             {loadedBowlers &&
@@ -54,7 +57,16 @@ const CreateGame = () => {
                             </fieldset>
                         )
                     })}
-                    <input type="submit" value="Create Game" />
+                    <div className='create-game-submit-btn'>
+                        <Button
+                            type="submit"
+                            color="primary"
+                            variant="contained"
+                            startIcon={<SaveIcon />}
+                        >
+                            Create Game
+                    </Button>
+                    </div>
                 </form>
             }
         </FormContext>

@@ -1,6 +1,7 @@
 .game-form {
     margin: 0 1rem;
     min-width: 600px;
+    padding: 0;
 }
 
 p {
@@ -11,4 +12,8 @@ fieldset {
     padding: 0;
     margin: 0;
     border: none;
+}
+
+.create-game-submit-btn {
+    margin-top: 1rem;
 }

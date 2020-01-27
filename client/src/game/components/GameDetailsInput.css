@@ -1,0 +1,8 @@
+.game-details-input {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    justify-content: space-around;
+    width: 80%;
+}
