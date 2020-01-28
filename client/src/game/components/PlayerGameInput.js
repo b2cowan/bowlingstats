@@ -198,12 +198,8 @@ const PlayerGameInput = props => {
                     />}
                     name={`${props.fieldName}handicap`}
                     control={control}
-                    rules={{
-                        required: 'Enter Handicap.'
-                    }}
                     defaultValue=""
                 />
-                <ErrorMessage errors={errors} name={`${props.fieldName}handicap`} as="p" />
                 <div className="player-btns">
                     <Button
                         size="small"

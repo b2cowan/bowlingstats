@@ -1,30 +1,35 @@
 
-.form-container {
-    display: flex;
-    justify-content: center;
-}
+
 .game-form {
-    margin: 0 1rem;
-    min-width: 600px;
-    padding: 0;
+  margin: 0 1rem;
+  /* min-width: 600px; */
+  padding: 0;
 }
 
 p {
-    color: red;
+  color: red;
 }
 
 fieldset {
-    padding: 0;
-    margin: 0;
-    border: none;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
-.create-game-btns{
-    display: flex;
-    flex-direction: flex-start;
+.create-game-btns {
+  display: flex;
+  flex-direction: flex-start;
 }
 
-.create-game-btns button{
-    padding: 0 1rem;
-    margin: 0 0.25rem;
+.create-game-btns button {
+  padding: 0 1rem;
+  margin: 0 0.25rem;
 }
+
+@media only screen and (min-width: 1200px) {
+    .form-container {
+        display: flex;
+        justify-content: center;
+    }
+    
+  }
