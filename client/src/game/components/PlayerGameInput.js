@@ -185,6 +185,7 @@ const PlayerGameInput = props => {
                 <h4>{props.firstName} {props.lastName}</h4>
                 <input type="button" name={`${props.fieldName}.bowlOff`} value={bowlOff} ref={register} style={{ display: "none" }} />
                 <input type="button" name={`${props.fieldName}.isAbsent`} value={absent} ref={register} style={{ display: "none" }} />
+                <input type="button" name={`${props.fieldName}.position`} value={props.idx} ref={register} style={{ display: "none" }}/>
                 <input type="button" name={`${props.fieldName}.scratchScore`} defaultValue={scratchScore} ref={register} style={{ display: "none" }} />
                 <input type="button" name={`${props.fieldName}.bowlerId`} ref={register} style={{ display: "none" }} defaultValue={props.bowlerId} />
                 <Controller
