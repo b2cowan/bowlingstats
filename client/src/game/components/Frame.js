@@ -5,10 +5,8 @@ import Button from '@material-ui/core/Button';
 import './Frame.css';
 
 const Frame = props => {
-    const { register, setValue, watch } = useFormContext();
+    const { register, setValue } = useFormContext();
     const [isSplit, setIsSplit] = useState(false);
-    const [disableSecondShot, setDisableSecondShot] = useState();
-    const [disableThirdShot, setDisableThirdShot] = useState();
 
     const handleSplit = () => {
         setIsSplit(!isSplit);
@@ -22,29 +20,6 @@ const Frame = props => {
         }
     });
 
-    const onBlurChecks = e => {
-        props.handleInputChange(e);
-        const isStrike = watch(`${props.fieldName}.shot1`, "value");
-        if (props.frameNum !== 10) {
-            if (isStrike.toLowerCase() === "x") {
-                setValue(`${props.fieldName}.shot2`, '');
-                setDisableSecondShot(true);
-            }
-            if (isStrike.toLowerCase() !== "x") {
-                setDisableSecondShot(false);
-            }
-        }
-        if (props.frameNum === 10) {
-            if (isStrike.toLowerCase() !== "x") {
-                setValue(`${props.fieldName}.shot3`, '');
-                setDisableThirdShot(true);
-            }
-            if (isStrike.toLowerCase() === "x") {
-                setDisableThirdShot(false);
-            }
-        }
-    }
-
     return (
         <div className={`frame ${props.frameNum === 10 ? "frame-ten" : "frames-less-10"} `}>
             <h5 className="frame-title">{props.frameNum}</h5>
@@ -54,7 +29,7 @@ const Frame = props => {
                         name={`${props.fieldName}.shot1`}
                         type="text"
                         ref={register}
-                        onBlur={onBlurChecks}
+                        onBlur={props.handleInputChange}
                         disabled={props.isAbsent}
                     />
                     <input
@@ -62,7 +37,7 @@ const Frame = props => {
                         type="text"
                         ref={register}
                         onBlur={props.handleInputChange}
-                        disabled={props.isAbsent || disableSecondShot}
+                        disabled={props.isAbsent}
                     />
                     {props.frameNum === 10 &&
                         <input
@@ -70,7 +45,7 @@ const Frame = props => {
                             type="text"
                             ref={register}
                             onBlur={props.handleInputChange}
-                            disabled={props.isAbsent || disableThirdShot}
+                            disabled={props.isAbsent}
                         />
                     }
                 </div>

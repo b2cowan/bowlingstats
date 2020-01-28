@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useFormContext, Controller, ErrorMessage } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -8,7 +8,7 @@ import { frameScore } from '../../shared/helpers/frameScores-helper';
 import './PlayerGameInput.css';
 
 const PlayerGameInput = props => {
-    const { register, control, errors, setValue } = useFormContext();
+    const { register, control, setValue } = useFormContext();
     const [bowlOff, setBowlOff] = useState(false);
     const [absent, setAbsent] = useState(false);
     const [scratchScore, setScratchScore] = useState();
