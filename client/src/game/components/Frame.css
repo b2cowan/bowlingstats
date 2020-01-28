@@ -8,6 +8,13 @@
     margin: 1rem 0;    
 }
 
+.frame-sans-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+}
+
 .frame-shots {
     display: flex;
     justify-content: flex-end;
@@ -29,7 +36,7 @@
     align-self: center;
     display: flex;
     width: 80%;
-    height: 35px;
+    height: 100%;
     padding-bottom: 5px;
     padding-top: 5px;
     margin: 0;
@@ -44,7 +51,7 @@
     border: none;
     text-align: center;
     font-weight: 700;
-    font-size: 100%;
+    font-size: 150%;
 }
 
 .frame-title {
@@ -55,8 +62,11 @@
 
 
 .frame-split-btn{
+    display: flex;
     height: 20px;
     margin-bottom: 1rem;
+    align-self: bottom;
+    justify-content: center;
 }
 
 .frame-split-btn span{

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
-import Frame from './Frame';
-
+import { useFormContext, Controller, ErrorMessage } from 'react-hook-form';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import Frame from './Frame';
 import { frameScore } from '../../shared/helpers/frameScores-helper';
 import './PlayerGameInput.css';
 
 const PlayerGameInput = props => {
-    const { register } = useFormContext();
+    const { register, control, errors, setValue } = useFormContext();
     const [bowlOff, setBowlOff] = useState(false);
     const [absent, setAbsent] = useState(false);
+    const [scratchScore, setScratchScore] = useState();
     const [frameShots, setFrameShots] = useState({
         frameScore1: '',
         frameScore2: '',
@@ -50,7 +51,22 @@ const PlayerGameInput = props => {
                 frameScore10: ''
             })
         }
-    }, [absent])
+    }, [absent]);
+
+    const handleBowlOff = () => {
+        setBowlOff(!bowlOff);
+    };
+
+    const handleAbsent = () => {
+        if (absent) {
+            setAbsent(false);
+        }
+        if (!absent) {
+            setAbsent(true);
+            setBowlOff(false);
+            setValue(`${props.fieldName}handicap`, "");
+        }
+    };
 
     //set 1st frame score
     useEffect(() => {
@@ -158,7 +174,8 @@ const PlayerGameInput = props => {
         if (score) {
             setFrameShots(prevState => {
                 return { ...prevState, frameScore10: score }
-            })
+            });
+            setScratchScore(score);
         };
     }, [frameShots.frameScore9, frameShots.frame10shot1, frameShots.frame10shot2, frameShots.frame10shot3]);
 
@@ -166,19 +183,33 @@ const PlayerGameInput = props => {
         <div className="player-game">
             <div className="player-name">
                 <h4>{props.firstName} {props.lastName}</h4>
-                <input
-                    type="text"
-                    name={`${props.fieldName}.bowlerId`}
-                    ref={register}
-                    style={{ display: "none" }}
-                    defaultValue={props.bowlerId}
+                <input type="button" name={`${props.fieldName}.bowlOff`} value={bowlOff} ref={register} style={{ display: "none" }} />
+                <input type="button" name={`${props.fieldName}.isAbsent`} value={absent} ref={register} style={{ display: "none" }} />
+                <input type="button" name={`${props.fieldName}.scratchScore`} defaultValue={scratchScore} ref={register} style={{ display: "none" }} />
+                <input type="button" name={`${props.fieldName}.bowlerId`} ref={register} style={{ display: "none" }} defaultValue={props.bowlerId} />
+                <Controller
+                    as={<TextField
+                        label="handicap"
+                        inputRef={register}
+                        type="number"
+                        variant="outlined"
+                        size="small"
+                        disabled={absent}
+                    />}
+                    name={`${props.fieldName}handicap`}
+                    control={control}
+                    rules={{
+                        required: 'Enter Handicap.'
+                    }}
+                    defaultValue=""
                 />
+                <ErrorMessage errors={errors} name={`${props.fieldName}handicap`} as="p" />
                 <div className="player-btns">
                     <Button
                         size="small"
                         variant={bowlOff ? "contained" : "outlined"}
                         color="primary"
-                        onClick={() => { setBowlOff(!bowlOff) }}
+                        onClick={handleBowlOff}
                         disabled={absent}
                     >
                         B/O
@@ -187,7 +218,7 @@ const PlayerGameInput = props => {
                         size="small"
                         variant={absent ? "contained" : "outlined"}
                         color="secondary"
-                        onClick={() => { setAbsent(!absent) }}
+                        onClick={handleAbsent}
                     >
                         Abs
                     </Button>

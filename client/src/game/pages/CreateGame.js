@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import axios from 'axios';
-
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 // import { useHistory } from 'react-router-dom';
@@ -13,6 +12,11 @@ import './CreateGame.css';
 const CreateGame = () => {
     const methods = useForm();
     const [loadedBowlers, setLoadedBowlers] = useState();
+    const defaultValues = {
+        onDate: "",
+        gameNum: "",
+        laneNum: ""
+    };
 
     useEffect(() => {
         axios(`/api/bowlers`)
@@ -40,41 +44,43 @@ const CreateGame = () => {
     return (
         <FormContext {...methods}>
             {loadedBowlers &&
-                <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
-                    <GameDetailsInput />
-                    {loadedBowlers && loadedBowlers.map((bowler, idx) => {
-                        const fieldName = `bowlerStats[${idx}]`;
-                        return (
-                            <fieldset name={fieldName} key={fieldName}>
-                                <PlayerGameInput
-                                    idx={idx}
-                                    fieldName={fieldName}
-                                    key={bowler.id}
-                                    bowlerId={bowler.id}
-                                    firstName={bowler.firstName}
-                                    lastName={bowler.lastName}
-                                />
-                            </fieldset>
-                        )
-                    })}
-                    <div className="create-game-btns">
-                        <Button
-                            type="submit"
-                            color="primary"
-                            variant="outlined"
-                            startIcon={<SaveIcon />}
-                        >
-                            Save Game
+                <div className="form-container">
+                    <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
+                        <GameDetailsInput />
+                        {loadedBowlers && loadedBowlers.map((bowler, idx) => {
+                            const fieldName = `bowlerStats[${idx}]`;
+                            return (
+                                <fieldset name={fieldName} key={fieldName}>
+                                    <PlayerGameInput
+                                        idx={idx}
+                                        fieldName={fieldName}
+                                        key={bowler.id}
+                                        bowlerId={bowler.id}
+                                        firstName={bowler.firstName}
+                                        lastName={bowler.lastName}
+                                    />
+                                </fieldset>
+                            )
+                        })}
+                        <div className="create-game-btns">
+                            <Button
+                                type="submit"
+                                color="primary"
+                                variant="outlined"
+                                startIcon={<SaveIcon />}
+                            >
+                                Save Game
                     </Button>
-                        <Button
-                            type="submit"
-                            color="secondary"
-                            variant="outlined"
-                        >
-                            Clear Form
+                            <Button
+                                color="secondary"
+                                variant="outlined"
+                                onClick={() => { methods.reset(defaultValues); }}
+                            >
+                                Clear Form
                     </Button>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             }
         </FormContext>
     )

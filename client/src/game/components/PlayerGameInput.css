@@ -18,17 +18,13 @@
 
 .player-btns {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 80%;
-    height: 20px;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    height: 100%;
     margin: 1rem 0;
 }
 
 .player-btns span{
     height: 10px;
 }
-
-/* .player-btns button{
-    height: 15px;
-} */

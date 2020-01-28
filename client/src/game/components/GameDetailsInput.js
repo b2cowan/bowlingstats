@@ -12,12 +12,12 @@ const GameDetailsInput = props => {
         <div className='game-details'>
             <div className={`game-details-input game-details-date`}>
                 <Controller
-                    as={<TextField 
-                        label="Date" 
+                    as={<TextField
+                        label="Date"
                         type="date"
                         InputLabelProps={{
-                        shrink: true
-                      }}/>}
+                            shrink: true
+                        }} />}
                     control={control}
                     name="onDate"
                     rules={{
@@ -28,22 +28,31 @@ const GameDetailsInput = props => {
                 <ErrorMessage errors={errors} name="onDate" as="p" />
             </div>
             <div className={`game-details-input game-details-text`}>
-                <label htmlFor="gameNum">Game Number: </label>
-                <input
-                    type="text"
+                <Controller
+                    as={<TextField
+                        label="Game Number"
+                        inputRef={register}
+                        type="number"
+                    />}
                     name="gameNum"
-                    ref={register({
+                    control={control}
+                    rules={{
                         required: 'Game number is required.'
-                    })}
+                    }}
+                    defaultValue=""
                 />
                 <ErrorMessage errors={errors} name="gameNum" as="p" />
             </div>
             <div className={`game-details-input game-details-text`}>
-                <label htmlFor="laneNum">Starting Lane: </label>
-                <input
-                    type="text"
+                <Controller
+                    as={<TextField
+                        label="Lane Number"
+                        inputRef={register}
+                        type="number"
+                    />}
                     name="laneNum"
-                    ref={register}
+                    control={control}
+                    defaultValue=""
                 />
             </div>
         </div>
