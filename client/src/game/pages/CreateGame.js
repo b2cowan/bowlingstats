@@ -123,7 +123,7 @@ const CreateGame = () => {
                 <div className="form-container">
                     <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
                         <GameDetailsInput />
-                        <SortableList bowlers={loadedBowlers} onSortEnd={onSortEnd} dropDownSort={dropDownSort} distance={1}/>
+                        <SortableList bowlers={loadedBowlers} onSortEnd={onSortEnd} dropDownSort={dropDownSort} distance={1} useDragHandle={true}/>
                         <div className="create-game-btns">
                             <Button
                                 type="submit"

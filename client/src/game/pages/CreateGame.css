@@ -69,7 +69,7 @@ fieldset {
   }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .drag-handle {
     display: none;
   }
@@ -78,14 +78,7 @@ fieldset {
 @media (min-width: 769px) {
   .sort-drop-down {
     display: none;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 0.5rem;
-    text-align: center;
-    margin: 1rem 0; */
   }
-}
+} */
 
 
