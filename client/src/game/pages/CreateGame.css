@@ -69,7 +69,7 @@ fieldset {
   }
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .drag-handle {
     display: none;
   }
@@ -79,6 +79,6 @@ fieldset {
   .sort-drop-down {
     display: none;
   }
-} */
+}
 
 
