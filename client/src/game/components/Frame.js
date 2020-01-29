@@ -76,7 +76,7 @@ const Frame = props => {
             </div>
             <div className="frame-split-btn">
                 <Button
-                    variant={isSplit ? "contained" : "outlined"}
+                    variant={!isSplit || props.isAbsent ? "outlined" : "contained"}
                     color="secondary"
                     onClick={handleSplit}
                     disabled={props.isAbsent}

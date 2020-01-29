@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
+
 import { SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
 import arrayMove from "array-move";
 
@@ -43,9 +43,9 @@ const SortableList = SortableContainer(({ bowlers, dropDownSort }) => {
                         </div>
                     )
                 });
-                const fieldName = `bowlerStats[${idx}]`;
+                const fieldName = `bowlerStats[${bowler.id}]`;
                 return (
-                    <SortableItem index={idx} key={`${bowler.id}-${idx}`}>
+                    <SortableItem index={idx} key={bowler.id}>
                         <div className="bowler-list-item">
                             <DragHandle className="drag-handle" />
                             <div className="sort-drop-down">
@@ -57,11 +57,10 @@ const SortableList = SortableContainer(({ bowlers, dropDownSort }) => {
                                     {dropDown}
                                 </Select>
                             </div>
-                            <fieldset name={fieldName} key={fieldName}>
+                            <fieldset name={fieldName} >
                                 <PlayerGameInput
                                     idx={idx + 1}
                                     fieldName={fieldName}
-                                    key={bowler.id}
                                     bowlerId={bowler.id}
                                     firstName={bowler.firstName}
                                     lastName={bowler.lastName}
@@ -124,7 +123,7 @@ const CreateGame = () => {
                 <div className="form-container">
                     <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
                         <GameDetailsInput />
-                        <SortableList bowlers={loadedBowlers} onSortEnd={onSortEnd} dropDownSort={dropDownSort} />
+                        <SortableList bowlers={loadedBowlers} onSortEnd={onSortEnd} dropDownSort={dropDownSort} distance={1}/>
                         <div className="create-game-btns">
                             <Button
                                 type="submit"
