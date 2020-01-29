@@ -1,5 +1,3 @@
-
-
 .game-form {
   margin: 0 1rem;
   /* min-width: 600px; */
@@ -21,11 +19,11 @@ p {
 
 .drag-handle {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 0.5rem;
-    text-align: center;
-    margin: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  text-align: center;
+  margin: 1rem 0;
 }
 
 .drag-handle h1 {
@@ -33,8 +31,19 @@ p {
   border-radius: 50%;
   height: 40px;
   width: 40px;
-  line-height: 35px;;
+  line-height: 35px;
   text-align: center;
+}
+
+.sort-drop-down {
+  /* display: none; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  text-align: center;
+  margin: 1rem 0;
 }
 
 fieldset {
@@ -54,8 +63,29 @@ fieldset {
 }
 
 @media only screen and (min-width: 1200px) {
-    .form-container {
-        display: flex;
-        justify-content: center;
-    }
+  .form-container {
+    display: flex;
+    justify-content: center;
   }
+}
+
+@media (max-width: 768px) {
+  .drag-handle {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .sort-drop-down {
+    display: none;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+    text-align: center;
+    margin: 1rem 0; */
+  }
+}
+
+
