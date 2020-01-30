@@ -25,8 +25,8 @@ const AnchorOdds = () => {
     return (
         <div className="anchor-odds-form">
             <h1>Anchor Odds</h1>
-            {saveOdds && <h3>Odds on save opportunity: {saveOdds}</h3>}
-            {beerFrameOdds && <h3>Odds on beer frame opportunity: {saveOdds}</h3>}
+            {saveOdds && <h3>Save opportunity: {saveOdds*100}%</h3>}
+            {beerFrameOdds && <h3>Beer frame opportunity: {beerFrameOdds*100}%</h3>}
             <form>
                 <div className="inputs">
                     <TextField id="bowler-1" label="Bowler 1 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerOne(e.target.value)} />
