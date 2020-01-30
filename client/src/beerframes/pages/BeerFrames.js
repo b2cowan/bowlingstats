@@ -1,8 +1,13 @@
 import React from 'react';
 
+import AnchorOdds from '../components/AnchorOdds';
+import './BeerFrames.css';
+
 const BeerFrames = () => {
     return (
-        <h1>Beer Frames</h1>
+        <div className="container">
+            <AnchorOdds />
+        </div>
     )
 }
 

@@ -69,16 +69,11 @@ fieldset {
   }
 }
 
-@media (max-width: 768px) {
-  .drag-handle {
-    display: none;
-  }
-}
 
-@media (min-width: 769px) {
+/* @media (min-width: 769px) {
   .sort-drop-down {
     display: none;
   }
-}
+} */
 
 
