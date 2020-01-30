@@ -12,13 +12,13 @@ const AnchorOdds = () => {
     const [beerFrameOdds, setBeerFrameOdds] = useState();
 
     const calculateOdds = (b1, b2, b3) => {
-        const calculatedSaveOdds = b1 * b2 * b3;
+        const calculatedSaveOdds = (b1 * b2 * b3).toFixed(4);
         setSaveOdds(calculatedSaveOdds);
 
         const beerFrameOdds1 = (1 - b1) * b2 * b3;
         const beerFrameOdds2 = b1 * (1 - b2) * b3;
         const beerFrameOdds3 = b1 * b2 * (1 - b3);
-        const calculatedBeerFrameOdds = beerFrameOdds1 + beerFrameOdds2 + beerFrameOdds3;
+        const calculatedBeerFrameOdds = (beerFrameOdds1 + beerFrameOdds2 + beerFrameOdds3).toFixed(4);
         setBeerFrameOdds(calculatedBeerFrameOdds);
     }
 
