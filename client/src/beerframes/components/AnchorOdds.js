@@ -40,8 +40,8 @@ const AnchorOdds = () => {
             <form>
                 <div className="inputs">
                     <TextField id="bowler-1" label="Bowler 1 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerOne(e.target.value)} />
-                    <TextField id="bowler-2" label="Bowler 1 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerTwo(e.target.value)} />
-                    <TextField id="bowler-3" label="Bowler 1 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerThree(e.target.value)} />
+                    <TextField id="bowler-2" label="Bowler 2 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerTwo(e.target.value)} />
+                    <TextField id="bowler-3" label="Bowler 3 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerThree(e.target.value)} />
 
                     <Button
                         onClick={() => calculateOdds(bowlerOne, bowlerTwo, bowlerThree)}
