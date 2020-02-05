@@ -25,18 +25,6 @@ const AnchorOdds = () => {
     return (
         <div className="anchor-odds-form">
             <h1>Anchor Odds</h1>
-            {saveOdds &&
-                <div className="results">
-                    <h3>Save Opportunity:</h3>
-                    <h3>{saveOdds * 100}%</h3>
-                </div>
-            }
-            {beerFrameOdds &&
-                <div className="results">
-                    <h3>Beer Frame Opportunity: </h3>
-                        <h3>{beerFrameOdds * 100}%</h3>
-                </div>
-            }
             <form>
                 <div className="inputs">
                     <TextField id="bowler-1" label="Bowler 1 Strike Rate" variant="outlined" type="number" onChange={e => setBowlerOne(e.target.value)} />
@@ -52,6 +40,20 @@ const AnchorOdds = () => {
                 </Button>
                 </div>
             </form>
+            {beerFrameOdds &&
+                <div className="results">
+                    <p>Beer Frame Opportunity Rate: <span>{(beerFrameOdds * 100).toFixed(2)}%</span></p>
+                    <p><span>{(beerFrameOdds * 10).toFixed(2)}</span> opportunites per game</p>
+                    <p><span>{(beerFrameOdds * 30).toFixed(2)}</span> opportunites per series</p>
+                </div>
+            }
+            {saveOdds &&
+                <div className="results">
+                    <p>Save Opportunity Rate: <span>{(saveOdds * 100).toFixed(2)}%</span></p>
+                    <p><span>{(saveOdds * 10).toFixed(2)}</span> opportunites per game</p>
+                    <p><span>{(saveOdds * 30).toFixed(2)}</span> opportunites per series</p>
+                </div>
+            }
         </div>
     )
 }

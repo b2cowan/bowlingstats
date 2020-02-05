@@ -7,10 +7,19 @@ main {
     align-items: center;
 }
 
+.results p {
+    color: black;
+    margin: 0.25rem;
+}
+.results span {
+    font-weight: 700;
+}
+
 .results {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 0.5rem;
 }
 
 .anchor-odds-form {
