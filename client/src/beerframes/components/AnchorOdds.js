@@ -42,14 +42,14 @@ const AnchorOdds = () => {
             </form>
             {beerFrameOdds &&
                 <div className="results">
-                    <p>Beer Frame Opportunity Rate: <span>{(beerFrameOdds * 100).toFixed(2)}%</span></p>
+                    <p><span>Beer Frames</span></p>
                     <p><span>{(beerFrameOdds * 10).toFixed(2)}</span> opportunites per game</p>
                     <p><span>{(beerFrameOdds * 30).toFixed(2)}</span> opportunites per series</p>
                 </div>
             }
             {saveOdds &&
                 <div className="results">
-                    <p>Save Opportunity Rate: <span>{(saveOdds * 100).toFixed(2)}%</span></p>
+                    <p><span>Saves</span></p>
                     <p><span>{(saveOdds * 10).toFixed(2)}</span> opportunites per game</p>
                     <p><span>{(saveOdds * 30).toFixed(2)}</span> opportunites per series</p>
                 </div>
