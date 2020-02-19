@@ -4,17 +4,44 @@ const HttpError = require('../models/http-error');
 const Game = require('../models/games');
 // const Bowler = require('../models/bowlers');
 
+const getGameById = async (req,res,next) => {
+    const gameId = req.params.gameId;
+    let game;
+
+    try {
+        game = await Game.findById(gameId)
+        .populate({
+            path: 'bowlerStats.bowlerId',
+            model: 'Bowler'
+        });
+    } catch (err) {
+        const error = new HttpError('Fetching games failed', 500);
+        return next(error);
+    }
+
+    if (!game) {
+        const error = new HttpError('Could not find game for that gameId.', 404);
+        return next(error);
+    }
+
+    res.json({ game: game.toObject({ getters: true }) });
+};
+
 const getGames = async (req, res, next) => {
     let games;
 
     try {
-        games = await Game.find({});
+        games = await Game.find()
+        .populate({
+            path: 'bowlerStats.bowlerId',
+            model: 'Bowler'
+        });
     } catch (err) {
         const error = new HttpError('Fetching games failed', 500);
         return next(error);
     }
     res.json({ games: games.map(game => game.toObject({ getters: true })) });
-}
+};
 
 const createGame = async (req, res, next) => {
     const errors = validationResult(req);
@@ -25,7 +52,7 @@ const createGame = async (req, res, next) => {
         );
     }
 
-    const { onDate, laneNum, gameNum } = req.body;
+    const { onDate, laneNum, gameNum, bowlerStats } = req.body;
 
     let existingGame;
     try {
@@ -43,7 +70,7 @@ const createGame = async (req, res, next) => {
         onDate, 
         laneNum, 
         gameNum,
-        bowlerStats: []
+        bowlerStats
     });
 
     try {
@@ -62,3 +89,4 @@ const createGame = async (req, res, next) => {
 
 exports.createGame = createGame;
 exports.getGames = getGames;
+exports.getGameById = getGameById;

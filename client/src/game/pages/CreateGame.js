@@ -13,32 +13,10 @@ import GameDetailsInput from '../components/GameDetailsInput';
 import PlayerGameInput from '../components/PlayerGameInput';
 import './CreateGame.css';
 
-// const SortableItem = SortableElement(({ children }) => {
-//     return (
-//         <div>
-//             {children}
-//         </div>
-//     )
-// });
-
-
-// const SortableList = SortableContainer(({ bowlers, dropDownSort }) => {
-//     const dropDown = bowlers.map((bowler, idx) => {
-//         return (
-//             <MenuItem value={idx} key={idx}>
-//                 {idx + 1}
-//             </MenuItem>
-//         )
-//     });
-
-//     return (
-
-//     );
-// });
-
 const CreateGame = () => {
     const methods = useForm();
     const [loadedBowlers, setLoadedBowlers] = useState();
+    const [isClearing, setIsClearing] = useState(false);
     const defaultValues = {
         onDate: "",
         gameNum: "",
@@ -56,14 +34,14 @@ const CreateGame = () => {
 
     const onSubmit = (game, e) => {
         e.preventDefault();
-        // axios.post(`/api/games`, game)
-        //     .then(res => {
-        //         console.log(res.data);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
-        //     .then(methods.reset());
+        axios.post(`/api/games`, game)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .then(methods.reset(defaultValues));
         console.log(game);
     };
 
@@ -81,15 +59,21 @@ const CreateGame = () => {
             > {
                     props.bowlers.map((bowler, idx) => {
                         return (
-
                             <MenuItem value={idx} key={idx}>
                                 {idx + 1}
                             </MenuItem>
-
                         )
                     })}
             </Select>
         )
+    };
+
+    const clearForm = () => {
+        methods.reset(defaultValues);
+        setIsClearing(true);
+        setTimeout(() => {
+            setIsClearing(false);
+        }, 1000);
     };
 
     return (
@@ -105,7 +89,7 @@ const CreateGame = () => {
                                     <fieldset name={fieldName} key={bowler.id}>
                                         <div className="bowler-list-item">
                                             <div className="sort-drop-down">
-                                                <DropDown bowlers={loadedBowlers} idx={idx}/>
+                                                <DropDown bowlers={loadedBowlers} idx={idx} />
                                             </div>
 
                                             <PlayerGameInput
@@ -114,6 +98,7 @@ const CreateGame = () => {
                                                 bowlerId={bowler.id}
                                                 firstName={bowler.firstName}
                                                 lastName={bowler.lastName}
+                                                isClearing={isClearing}
                                             />
 
                                         </div>
@@ -134,7 +119,7 @@ const CreateGame = () => {
                             <Button
                                 color="secondary"
                                 variant="outlined"
-                                onClick={() => { methods.reset(defaultValues); }}
+                                onClick={clearForm}
                             >
                                 Clear Form
                             </Button>

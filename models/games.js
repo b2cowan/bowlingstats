@@ -9,19 +9,21 @@ var gameSchema = new Schema({
     gameNum: Number,
     bowlerStats: [{
         bowlerId: {
-            type: mongoose.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             required: true,
             ref: 'Bowler'
         },
+        isAbsent: Boolean,
+        bowlOff: Boolean,
         handicap: Number,
-        scratchScore: { type: Number, required: true },
+        scratchScore: Number,
         position: Number,
         frames: [{
             frameNum: { type: Number, required: true },
             shot1: String,
             shot2: String,
             shot3: String,
-            frameScore: { type: Number, required: true }
+            frameScore: Number
         }]
     }]
 });

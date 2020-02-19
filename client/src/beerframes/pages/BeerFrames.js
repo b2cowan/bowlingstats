@@ -5,7 +5,7 @@ import './BeerFrames.css';
 
 const BeerFrames = () => {
     return (
-        <div className="container">
+        <div className="beer-frame-container">
             <AnchorOdds />
         </div>
     )

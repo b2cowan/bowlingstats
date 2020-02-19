@@ -8,7 +8,7 @@ const bowlerSchema = new Schema({
     lastName: { type: String, required: true }, 
     CTFId: { type: String },
     games:[{
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
             required: true,
             ref: 'Game'
     }]

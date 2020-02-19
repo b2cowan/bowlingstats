@@ -1,0 +1,17 @@
+.team-stats {
+    display: flex;
+    justify-content: center;
+}
+
+.team-stats-bowler {
+    padding: 1rem;
+}
+
+.team-stats-bowler p {
+    color: black;
+}
+
+.summary-stats-table {
+    border: 1px solid black;
+    padding: 0.5rem;
+}

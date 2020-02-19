@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, ErrorMessage } from 'react-hook-form';
 import Button from '@material-ui/core/Button';
 
 import './Frame.css';
 
 const Frame = props => {
-    const { register, setValue } = useFormContext();
+    const { register, setValue, errors } = useFormContext();
     const [isSplit, setIsSplit] = useState(false);
 
     const handleSplit = () => {
@@ -49,14 +49,16 @@ const Frame = props => {
                         />
                     }
                 </div>
+                <ErrorMessage errors={errors} name={`${props.fieldName}.shot1`} as="p" />
                 <div className="frame-score">
                     <input
                         name={`${props.fieldName}.frameScore`}
                         type="text"
                         value={props.frameScore}
                         disabled
-                        ref={register}
+                        ref={register({required: "No Score"})}
                     />
+                    <ErrorMessage errors={errors} name={`${props.fieldName}.frameScore`} as="p" />
                 </div>
                 <input
                     name={`${props.fieldName}.frameNum`}

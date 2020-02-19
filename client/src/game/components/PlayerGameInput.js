@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { useState, useEffect, Fragment } from 'react';
+import { useFormContext, ErrorMessage } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -8,7 +8,7 @@ import { frameScore } from '../../shared/helpers/frameScores-helper';
 import './PlayerGameInput.css';
 
 const PlayerGameInput = props => {
-    const { register, setValue } = useFormContext();
+    const { register, setValue, errors } = useFormContext();
     const [bowlOff, setBowlOff] = useState(false);
     const [absent, setAbsent] = useState(false);
     const [scratchScore, setScratchScore] = useState();
@@ -51,7 +51,21 @@ const PlayerGameInput = props => {
                 frameScore10: ''
             })
         }
-    }, [absent]);
+        if (props.isClearing) {
+            setFrameShots({
+                frameScore1: '',
+                frameScore2: '',
+                frameScore3: '',
+                frameScore4: '',
+                frameScore5: '',
+                frameScore6: '',
+                frameScore7: '',
+                frameScore8: '',
+                frameScore9: '',
+                frameScore10: ''
+            })
+        }
+    }, [absent, props.isClearing]);
 
     const handleBowlOff = () => {
         setBowlOff(!bowlOff);
@@ -188,16 +202,18 @@ const PlayerGameInput = props => {
                 <input type="button" name={`${props.fieldName}.position`} value={props.idx} ref={register} style={{ display: "none" }} />
                 <input type="button" name={`${props.fieldName}.scratchScore`} defaultValue={scratchScore} ref={register} style={{ display: "none" }} />
                 <input type="button" name={`${props.fieldName}.bowlerId`} ref={register} style={{ display: "none" }} defaultValue={props.bowlerId} />
-                <TextField
-                    label="handicap"
-                    inputRef={register}
-                    type="number"
-                    variant="outlined"
-                    size="small"
-                    disabled={absent}
-                    name={`${props.fieldName}.handicap`}
-                />
-
+                {!absent &&
+                    < TextField
+                        label="handicap"
+                        inputRef={register({required: 'Handicap is required'})}
+                        type="number"
+                        variant="outlined"
+                        size="small"
+                        disabled={absent}
+                        name={`${props.fieldName}.handicap`}
+                    />
+                }
+                <ErrorMessage errors={errors} name={`${props.fieldName}.handicap`} as="p" />
                 <div className="player-btns">
                     <Button
                         size="small"
@@ -218,76 +234,80 @@ const PlayerGameInput = props => {
                     </Button>
                 </div>
             </div>
-            <Frame
-                frameNum={1}
-                fieldName={`${props.fieldName}.frames[0]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore1}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={2}
-                fieldName={`${props.fieldName}.frames[1]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore2}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={3}
-                fieldName={`${props.fieldName}.frames[2]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore3}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={4}
-                fieldName={`${props.fieldName}.frames[3]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore4}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={5}
-                fieldName={`${props.fieldName}.frames[4]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore5}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={6}
-                fieldName={`${props.fieldName}.frames[5]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore6}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={7}
-                fieldName={`${props.fieldName}.frames[6]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore7}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={8}
-                fieldName={`${props.fieldName}.frames[7]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore8}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={9}
-                fieldName={`${props.fieldName}.frames[8]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore9}
-                isAbsent={absent}
-            />
-            <Frame
-                frameNum={10}
-                fieldName={`${props.fieldName}.frames[9]`}
-                handleInputChange={handleInputChange}
-                frameScore={frameShots.frameScore10}
-                isAbsent={absent}
-            />
+            {!absent &&
+                <Fragment>
+                    <Frame
+                        frameNum={1}
+                        fieldName={`${props.fieldName}.frames[0]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore1}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={2}
+                        fieldName={`${props.fieldName}.frames[1]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore2}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={3}
+                        fieldName={`${props.fieldName}.frames[2]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore3}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={4}
+                        fieldName={`${props.fieldName}.frames[3]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore4}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={5}
+                        fieldName={`${props.fieldName}.frames[4]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore5}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={6}
+                        fieldName={`${props.fieldName}.frames[5]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore6}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={7}
+                        fieldName={`${props.fieldName}.frames[6]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore7}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={8}
+                        fieldName={`${props.fieldName}.frames[7]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore8}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={9}
+                        fieldName={`${props.fieldName}.frames[8]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore9}
+                        isAbsent={absent}
+                    />
+                    <Frame
+                        frameNum={10}
+                        fieldName={`${props.fieldName}.frames[9]`}
+                        handleInputChange={handleInputChange}
+                        frameScore={frameShots.frameScore10}
+                        isAbsent={absent}
+                    />
+                </Fragment>
+            }
         </div >
     )
 }

@@ -11,6 +11,7 @@ const port = process.env.PORT || 8000;
 
 const APIGameRoutes = require('./routes/games-routes')
 const APIBowlerRoutes = require('./routes/bowlers-routes');
+const APITeamStatsRoutes = require('./routes/team-stats-routes');
 
 app.use(bodyParser.json());
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use('/api/games', APIGameRoutes);
 app.use('/api/bowlers', APIBowlerRoutes);
+app.use('/api/teamstats', APITeamStatsRoutes);
 
 app.use(express.static(path.join(__dirname, "client", "build")));
 

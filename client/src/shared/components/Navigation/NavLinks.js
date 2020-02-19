@@ -8,10 +8,10 @@ const NavLinks = () => {
     return (
         <ul className='nav-links'>
             <li>
-                <NavLink exact to='/teams'>Teams</NavLink>
+                <NavLink exact to='/teams'>Team Stats</NavLink>
             </li>
             <li>
-                <NavLink exact to='/bowlers'>Bowlers</NavLink>
+                <NavLink exact to='/bowlers'>Bowler Stats</NavLink>
             </li>
             <li>
                 <NavLink exact to='/beerframes'>Beer Frames</NavLink>
