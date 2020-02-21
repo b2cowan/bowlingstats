@@ -9,6 +9,14 @@ p {
   color: red;
 }
 
+.modal-p {
+  color: black;
+}
+
+.modal-footer {
+  /* padding: 0 0.5rem; */
+}
+
 .sortable-element {
   display: flex;
   flex-direction: row;

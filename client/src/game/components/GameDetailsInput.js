@@ -46,6 +46,22 @@ const GameDetailsInput = props => {
             <div className={`game-details-input game-details-text`}>
                 <Controller
                     as={<TextField
+                        label="Season"
+                        inputRef={register}
+                        type="number"
+                    />}
+                    name="season"
+                    control={control}
+                    rules={{
+                        required: 'Season is required.'
+                    }}
+                    defaultValue=""
+                />
+                <ErrorMessage errors={errors} name="season" as="p" />
+            </div>
+            <div className={`game-details-input game-details-text`}>
+                <Controller
+                    as={<TextField
                         label="Lane Number"
                         inputRef={register}
                         type="number"

@@ -28,7 +28,7 @@ const Frame = props => {
                     <input
                         name={`${props.fieldName}.shot1`}
                         type="text"
-                        ref={register}
+                        ref={register({required: "No 1st Shot"})}
                         onBlur={props.handleInputChange}
                         disabled={props.isAbsent}
                     />
@@ -56,9 +56,8 @@ const Frame = props => {
                         type="text"
                         value={props.frameScore}
                         disabled
-                        ref={register({required: "No Score"})}
+                        ref={register}
                     />
-                    <ErrorMessage errors={errors} name={`${props.fieldName}.frameScore`} as="p" />
                 </div>
                 <input
                     name={`${props.fieldName}.frameNum`}

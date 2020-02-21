@@ -7,6 +7,7 @@ var gameSchema = new Schema({
     onDate: { type: Date, required: true },
     laneNum: Number,
     gameNum: Number,
+    season: Number,
     bowlerStats: [{
         bowlerId: {
             type: Schema.Types.ObjectId,

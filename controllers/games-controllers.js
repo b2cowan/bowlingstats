@@ -52,7 +52,7 @@ const createGame = async (req, res, next) => {
         );
     }
 
-    const { onDate, laneNum, gameNum, bowlerStats } = req.body;
+    const { onDate, laneNum, gameNum, bowlerStats, season } = req.body;
 
     let existingGame;
     try {
@@ -70,6 +70,7 @@ const createGame = async (req, res, next) => {
         onDate, 
         laneNum, 
         gameNum,
+        season,
         bowlerStats
     });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -9,6 +9,7 @@ import arrayMove from "array-move";
 
 // import { useHistory } from 'react-router-dom';
 
+import Modal from '../../shared/components/UIElements/Modal';
 import GameDetailsInput from '../components/GameDetailsInput';
 import PlayerGameInput from '../components/PlayerGameInput';
 import './CreateGame.css';
@@ -17,6 +18,7 @@ const CreateGame = () => {
     const methods = useForm();
     const [loadedBowlers, setLoadedBowlers] = useState();
     const [isClearing, setIsClearing] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const defaultValues = {
         onDate: "",
         gameNum: "",
@@ -41,7 +43,7 @@ const CreateGame = () => {
             .catch(err => {
                 console.log(err);
             })
-            .then(methods.reset(defaultValues));
+            .then(clearForm());
         console.log(game);
     };
 
@@ -76,11 +78,44 @@ const CreateGame = () => {
         }, 1000);
     };
 
+    const handleSubmitted = () => {
+        setIsSubmitted(true);
+    }
+
+    const clearSubmitted = () => {
+        setIsSubmitted(false);
+    }
+
     return (
         <FormContext {...methods}>
             {loadedBowlers &&
                 <div className="form-container">
                     <form className='game-form' onSubmit={methods.handleSubmit(onSubmit)}>
+                        <Modal
+                            header="Are you sure you want to submit?"
+                            show={isSubmitted}
+                            onCancel={clearSubmitted}
+                            footer={
+                                <Fragment>
+                                    <Button
+                                        type="submit"
+                                        color="primary"
+                                        variant="contained"
+                                        onClick={clearSubmitted}
+                                    >
+                                        Submit
+                                </Button>
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                        onClick={clearSubmitted}
+                                    >
+                                        Cancel
+                                </Button>
+                                </Fragment>
+                            }
+                        >
+                        </Modal>
                         <GameDetailsInput />
                         <div>
                             {loadedBowlers.map((bowler, idx) => {
@@ -91,7 +126,6 @@ const CreateGame = () => {
                                             <div className="sort-drop-down">
                                                 <DropDown bowlers={loadedBowlers} idx={idx} />
                                             </div>
-
                                             <PlayerGameInput
                                                 idx={idx + 1}
                                                 fieldName={fieldName}
@@ -109,10 +143,10 @@ const CreateGame = () => {
 
                         <div className="create-game-btns">
                             <Button
-                                type="submit"
                                 color="primary"
                                 variant="outlined"
                                 startIcon={<SaveIcon />}
+                                onClick={handleSubmitted}
                             >
                                 Save Game
                             </Button>
