@@ -11,19 +11,29 @@ const seasonalTeamStats = async (req, res, next) => {
             [
                 {
                     $unwind: "$bowlerStats"
-                },
+                 },
+                //  {
+                //     $match: {}
+                //  },
+                //  {
+                //      $group: {
+                //          _id: {season: "$season", bowlerId: "$bowlerStats.bowlerId" }
+                //      }
+                //  }
                 {
                     $group: {
-                        _id: "$bowlerStats.bowlerId",
+                        _id: {season: "$season", bowlerId: "$bowlerStats.bowlerId" },
                         average: { "$avg": "$bowlerStats.scratchScore" },
                         highGame: { "$max": "$bowlerStats.scratchScore" },
-                        lowGame: { "$min": "$bowlerStats.scratchScore" }
+                        lowGame: { "$min": "$bowlerStats.scratchScore" },
+                        totalPins: {"$sum": "$bowlerStats.scratchScore"},
+                        numGames: {"$sum": 1}
                     }
                 },
                 {
                     $lookup: {
                         from: "bowlers",
-                        localField: "_id",
+                        localField: "_id.bowlerId",
                         foreignField: "_id",
                         as: "bowler_details"
                     }
@@ -35,7 +45,9 @@ const seasonalTeamStats = async (req, res, next) => {
                         lastName: "$bowler_details.lastName",
                         average: "$average",
                         highGame: "$highGame",
-                        lowGame: "$lowGame"
+                        lowGame: "$lowGame",
+                        totalPins: "$totalPins",
+                        numGames: "$numGames"
                     }
                 }
             ]

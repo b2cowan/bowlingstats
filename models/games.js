@@ -24,7 +24,8 @@ var gameSchema = new Schema({
             shot1: String,
             shot2: String,
             shot3: String,
-            frameScore: Number
+            frameScore: Number,
+            isSplit: Boolean
         }]
     }]
 });

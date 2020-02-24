@@ -6,7 +6,7 @@ const path = require("path")
 require('dotenv').config()
 
 // const HttpError = require("./models/http-error");
-const seeds = require("./seeds");
+const seeds = require("./seeds2");
 const port = process.env.PORT || 8000;
 
 const APIGameRoutes = require('./routes/games-routes')
@@ -16,7 +16,7 @@ const APITeamStatsRoutes = require('./routes/team-stats-routes');
 app.use(bodyParser.json());
 
 // seeds.seedBowlers(); // seed the bowlers
-// seeds.seedGames(); // seed the games
+seeds.seedGames(); // seed the games
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
