@@ -43,21 +43,6 @@ const seasonalTeamStats = async (req, res, next) => {
                     }
                 }
             ]
-
-
-            // {
-            //     "onDate": { $lte: "2020-02-01" }
-            // }
-
-            // [{
-            //     $lookup: {
-            //         from: "bowlers",
-            //         localField: "bowlerStats.bowlerId",
-            //         foreignField: "_id",
-            //         as: "bowler_stats"
-            //     }
-            // },
-            // { $unwind: { path: "$bowler_stats" } }]
         )
     } catch (err) {
         const error = new HttpError('Fetching games failed', 500);

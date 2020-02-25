@@ -1,11 +1,11 @@
 const express = require('express');
 
-const teamStatsController = require('../controllers/team-stats-controllers');
+const beerFrameController = require('../controllers/beer-frame-controllers');
 
 const router = express.Router();
 
 // Route for fetching a list of all games
-router.get('/', teamStatsController.seasonalTeamStats);
+router.get('/', beerFrameController.weeklyBeerFrames);
 
 
 module.exports = router;

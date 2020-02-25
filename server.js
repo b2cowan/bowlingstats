@@ -12,6 +12,7 @@ const port = process.env.PORT || 8000;
 const APIGameRoutes = require('./routes/games-routes')
 const APIBowlerRoutes = require('./routes/bowlers-routes');
 const APITeamStatsRoutes = require('./routes/team-stats-routes');
+const APIBeerFrameRoutes = require('./routes/beer-frame-routes');
 
 app.use(bodyParser.json());
 
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 app.use('/api/games', APIGameRoutes);
 app.use('/api/bowlers', APIBowlerRoutes);
 app.use('/api/teamstats', APITeamStatsRoutes);
+app.use('/api/beerframes', APIBeerFrameRoutes);
 
 app.use(express.static(path.join(__dirname, "client", "build")));
 

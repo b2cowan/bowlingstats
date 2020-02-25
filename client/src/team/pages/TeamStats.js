@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import './TeamStats.css';
@@ -16,8 +16,9 @@ const TeamStats = () => {
                 console.log(err))
     }, []);
 
+
     return (
-        <Fragment>
+        <div className="team-stats-container">
             {loadedTeamStats &&
                 <div className="team-stats">
                     <table id="summaryStats" className="summary-stats-table">
@@ -47,7 +48,7 @@ const TeamStats = () => {
                     </table>
                 </div>
             }
-        </Fragment>
+        </div>
     )
 }
 
