@@ -16,7 +16,7 @@ const APITeamStatsRoutes = require('./routes/team-stats-routes');
 app.use(bodyParser.json());
 
 // seeds.seedBowlers(); // seed the bowlers
-// seeds.seedGames(); // seed the games
+seeds.seedGames(); // seed the games
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

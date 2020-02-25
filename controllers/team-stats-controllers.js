@@ -12,14 +12,6 @@ const seasonalTeamStats = async (req, res, next) => {
                 {
                     $unwind: "$bowlerStats"
                  },
-                //  {
-                //     $match: {}
-                //  },
-                //  {
-                //      $group: {
-                //          _id: {season: "$season", bowlerId: "$bowlerStats.bowlerId" }
-                //      }
-                //  }
                 {
                     $group: {
                         _id: {season: "$season", bowlerId: "$bowlerStats.bowlerId" },
