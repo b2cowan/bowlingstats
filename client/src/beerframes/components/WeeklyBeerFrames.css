@@ -1,43 +1,6 @@
-.team-stats-container {
+.weekly-beer-frame-container {
     display: flex;
     width: 100%;
     justify-content: center;
-}
-
-.team-stats {
-    display: flex;
-    justify-content: center;
-    overflow-x: auto;
-    max-width: 800px;
-}
-
-.team-stats-bowler {
-    padding: 1rem;
-}
-
-.team-stats-bowler p {
-    color: black;
-}
-
-.summary-stats-table {
-	border-collapse: collapse;
-	box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
-td {
-	padding: 15px;
-    background-color: rgba(255,255,255,0.2);
-    text-align: center;
-}
-
-th {
-    padding: 15px;
-    text-align: center;
-    background-color: #210d92;
-    color: white;
-}
-
-tr:hover {
-    background-color: gray;
-    color: white;
+    max-width: 500px;
 }

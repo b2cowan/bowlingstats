@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 import './TeamStats.css';
 
@@ -10,7 +17,6 @@ const TeamStats = () => {
         axios(`/api/teamstats`)
             .then(res => {
                 setLoadedTeamStats(res.data.summaryStats);
-                console.log(res.data);
             })
             .catch(err =>
                 console.log(err))
@@ -19,35 +25,41 @@ const TeamStats = () => {
 
     return (
         <div className="team-stats-container">
-            {loadedTeamStats &&
-                <div className="team-stats">
-                    <table id="summaryStats" className="summary-stats-table">
-                        <tbody>
-                            <tr>
-                                <th>Season</th>
-                                <th>Bowler</th>
-                                <th>Games</th>
-                                <th>Average</th>
-                                <th>High Game</th>
-                                <th>Low Game</th>
-                            </tr>
-                            {loadedTeamStats.map(bowler => {
-                                const bowlerKey = bowler._id.bowlerId + bowler._id.season
-                                return (
-                                    <tr key={bowlerKey}>
-                                        <td>{bowler._id.season}</td>
-                                        <td>{bowler.firstName} {bowler.lastName}</td>
-                                        <td>{bowler.numGames}</td>
-                                        <td>{bowler.average.toFixed(2)}</td>
-                                        <td>{bowler.highGame.toFixed(0)}</td>
-                                        <td>{bowler.lowGame.toFixed(0)}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            }
+            <div className="team-summary-stats-container">
+                {loadedTeamStats &&
+                    <Paper>
+                        <TableContainer>
+                            <Table stickyHeader size="small">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="center">Season</TableCell>
+                                        <TableCell align="center">Bowler</TableCell>
+                                        <TableCell align="center">Games</TableCell>
+                                        <TableCell align="center">Average</TableCell>
+                                        <TableCell align="center">High Game</TableCell>
+                                        <TableCell align="center">Low Game</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {loadedTeamStats.map(bowler => {
+                                        const bowlerKey = bowler._id.bowlerId + bowler._id.season
+                                        return (
+                                            <TableRow key={bowlerKey}>
+                                                <TableCell align="center">{bowler._id.season}</TableCell>
+                                                <TableCell align="center">{bowler.firstName} {bowler.lastName}</TableCell>
+                                                <TableCell align="center">{bowler.numGames}</TableCell>
+                                                <TableCell align="center">{bowler.average.toFixed(2)}</TableCell>
+                                                <TableCell align="center">{bowler.highGame.toFixed(0)}</TableCell>
+                                                <TableCell align="center">{bowler.lowGame.toFixed(0)}</TableCell>
+                                            </TableRow>
+                                        )
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
+                }
+            </div>
         </div>
     )
 }
