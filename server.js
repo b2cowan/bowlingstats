@@ -6,7 +6,7 @@ const path = require("path")
 require('dotenv').config()
 
 // const HttpError = require("./models/http-error");
-const seeds = require("./seeds2");
+// const seeds = require("./seeds");
 const port = process.env.PORT || 8000;
 
 const APIGameRoutes = require('./routes/games-routes')

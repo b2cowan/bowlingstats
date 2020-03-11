@@ -63,7 +63,7 @@ const WeeklyBeerFrames = () => {
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[5, 10, 25]}
+                        rowsPerPageOptions={[5, 10, 25, { value: -1, label: 'All' }]}
                         component="div"
                         count={loadedWeeklyBeerFrames.length}
                         rowsPerPage={rowsPerPage}

@@ -12,6 +12,7 @@ const PlayerGameInput = props => {
     const [bowlOff, setBowlOff] = useState(false);
     const [absent, setAbsent] = useState(false);
     const [scratchScore, setScratchScore] = useState();
+    const [handicap, setHandicap] = useState(0);
     const [frameShots, setFrameShots] = useState({
         frameScore1: '',
         frameScore2: '',
@@ -81,6 +82,10 @@ const PlayerGameInput = props => {
             setValue(`${props.fieldName}handicap`, "");
         }
     };
+
+    const handleHandicap = e => {
+        setHandicap(e.target.value);
+    }
 
     //set 1st frame score
     useEffect(() => {
@@ -205,12 +210,13 @@ const PlayerGameInput = props => {
                 {!absent &&
                     < TextField
                         label="handicap"
-                        inputRef={register({required: 'Handicap is required'})}
                         type="number"
                         variant="outlined"
                         size="small"
+                        defaultValue='0'
                         disabled={absent}
                         name={`${props.fieldName}.handicap`}
+                        onBlur={handleHandicap}
                     />
                 }
                 <ErrorMessage errors={errors} name={`${props.fieldName}.handicap`} as="p" />
@@ -306,6 +312,12 @@ const PlayerGameInput = props => {
                         frameScore={frameShots.frameScore10}
                         isAbsent={absent}
                     />
+                    <div className="final-score">
+                        <h5>Score with Handicap</h5>
+                        {handicap && scratchScore &&
+                            <h1>{parseInt(handicap) + parseInt(scratchScore)}</h1>
+                        }
+                    </div>
                 </Fragment>
             }
         </div >

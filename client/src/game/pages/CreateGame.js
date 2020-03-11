@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
+// import { useHistory } from 'react-router-dom';
 import { useForm, FormContext } from 'react-hook-form';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -24,6 +25,7 @@ const CreateGame = () => {
         gameNum: "",
         laneNum: ""
     };
+    // const history = useHistory();
 
     useEffect(() => {
         axios(`/api/bowlers`)
@@ -43,7 +45,7 @@ const CreateGame = () => {
             .catch(err => {
                 console.log(err);
             })
-            .then(clearForm());
+            .then(window.location.reload());
         console.log(game);
     };
 
@@ -55,7 +57,6 @@ const CreateGame = () => {
     const DropDown = props => {
         return (
             <Select
-                // id="demo-simple-select-outlined"
                 value={props.idx}
                 onChange={e => dropDownSort(props.idx, e.target.value)}
             > {
