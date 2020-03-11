@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import BowlerStats from './bowler/pages/BowlerStats';
 import TeamStats from './team/pages/TeamStats';
+import TeamGameLog from './team/components/TeamGameLog';
 import BeerFrames from './beerframes/pages/BeerFrames';
 import CreateGame from './game/pages/CreateGame';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
@@ -19,6 +20,9 @@ const App = () => {
                     </Route>
                     <Route exact path="/teams">
                         <TeamStats />
+                    </Route>
+                    <Route exact path="/teams/gamelog">
+                        <TeamGameLog />
                     </Route>
                     <Route exact path="/bowlers">
                         <BowlerStats />

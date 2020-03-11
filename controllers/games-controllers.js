@@ -4,16 +4,16 @@ const HttpError = require('../models/http-error');
 const Game = require('../models/games');
 // const Bowler = require('../models/bowlers');
 
-const getGameById = async (req,res,next) => {
+const getGameById = async (req, res, next) => {
     const gameId = req.params.gameId;
     let game;
 
     try {
         game = await Game.findById(gameId)
-        .populate({
-            path: 'bowlerStats.bowlerId',
-            model: 'Bowler'
-        });
+            .populate({
+                path: 'bowlerStats.bowlerId',
+                model: 'Bowler'
+            });
     } catch (err) {
         const error = new HttpError('Fetching games failed', 500);
         return next(error);
@@ -29,19 +29,33 @@ const getGameById = async (req,res,next) => {
 
 const getGames = async (req, res, next) => {
     let games;
+    const seasonNum = req.params.seasonNum;
 
     try {
-        games = await Game.find()
-        .populate({
-            path: 'bowlerStats.bowlerId',
-            model: 'Bowler'
-        });
+        games = await Game.find({ season: seasonNum })
+            .populate({
+                path: 'bowlerStats.bowlerId',
+                model: 'Bowler'
+            })
+            .sort({ onDate: -1 });
     } catch (err) {
         const error = new HttpError('Fetching games failed', 500);
         return next(error);
     }
     res.json({ games: games.map(game => game.toObject({ getters: true })) });
 };
+
+const getSeasons = async (req, res, next) => {
+    let seasons;
+
+    try {
+        seasons = await Game.find().distinct('season');
+    } catch (err) {
+        const error = new HttpError('Fetching games failed', 500);
+        return next(error);
+    }
+    res.json({ seasons })
+}
 
 const createGame = async (req, res, next) => {
     const errors = validationResult(req);
@@ -56,7 +70,7 @@ const createGame = async (req, res, next) => {
 
     let existingGame;
     try {
-        existingGame = await Game.findOne({onDate: onDate, gameNum: gameNum});
+        existingGame = await Game.findOne({ onDate: onDate, gameNum: gameNum });
     } catch (err) {
         new HttpError('Game creation failed, try again.', 422)
     };
@@ -67,8 +81,8 @@ const createGame = async (req, res, next) => {
     };
 
     const createdGame = new Game({
-        onDate, 
-        laneNum, 
+        onDate,
+        laneNum,
         gameNum,
         season,
         bowlerStats
@@ -91,3 +105,4 @@ const createGame = async (req, res, next) => {
 exports.createGame = createGame;
 exports.getGames = getGames;
 exports.getGameById = getGameById;
+exports.getSeasons = getSeasons;
