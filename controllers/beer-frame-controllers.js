@@ -14,7 +14,7 @@ const weeklyBeerFrames = async (req, res, next) => {
                         "threeStrikeFrames": [
                             { $unwind: "$bowlerStats" },
                             { $unwind: "$bowlerStats.frames" },
-                            // { $match: { onDate: new Date("2018-09-05T00:00:00.0Z") } },
+                            // { $match: { onDate: new Date("2019-09-25T00:00:00.0Z") } },
                             {
                                 $project: {
                                     gameId: "$_id",
@@ -23,9 +23,11 @@ const weeklyBeerFrames = async (req, res, next) => {
                                     bowlerId: "$bowlerStats.bowlerId",
                                     position: "$bowlerStats.position",
                                     frameNum: "$bowlerStats.frames.frameNum",
-                                    shot1: "$bowlerStats.frames.shot1"
+                                    shot1: "$bowlerStats.frames.shot1",
+                                    bowloff: "$bowlerStats.bowlOff"
                                 }
                             },
+                            { $match: { bowloff: false } },
                             { $sort: { gameNum: 1, frameNum: 1 } },
                             { $match: { $or: [{ shot1: "x" }, { shot1: "X" }] } },
                             {
@@ -49,9 +51,11 @@ const weeklyBeerFrames = async (req, res, next) => {
                                     bowlerId: "$bowlerStats.bowlerId",
                                     position: "$bowlerStats.position",
                                     frameNum: "$bowlerStats.frames.frameNum",
-                                    shot1: "$bowlerStats.frames.shot1"
+                                    shot1: "$bowlerStats.frames.shot1",
+                                    bowloff: "$bowlerStats.bowlOff"
                                 }
                             },
+                            { $match: { bowloff: false } },
                             { $sort: { gameNum: 1, frameNum: 1 } },
                             { $match: { shot1: { $nin: ["x", "X"] } } }
                         ],
