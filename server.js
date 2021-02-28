@@ -39,7 +39,7 @@ app.get("*", (req, res) => {
 });
 
 mongoose
-    .connect(process.env.MONGODB_URI || `mongodb://localhost:27017/bowlingSite`, {
+    .connect(process.env.MONGODB_URI || `mongodb+srv://bowlingstats:BrooklynDodgers@bowlingstats.qc1cy.mongodb.net/bowlingstats?retryWrites=true&w=majority`, { //mongodb://localhost:27017/bowlingSite
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
